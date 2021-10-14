@@ -1,0 +1,104 @@
+{
+  "qInfo": {
+    "qId": "aqaktAP",
+    "qType": "dimension"
+  },
+  "qDim": {
+    "qGrouping": "N",
+    "qFieldDefs": [
+      "Office"
+    ],
+    "qFieldLabels": [
+      "Office"
+    ],
+    "title": "Office",
+    "coloring": {
+      "changeHash": "0.7825560076162219",
+      "colorMapRef": "aqaktAP"
+    }
+  },
+  "qMetaDef": {
+    "title": "Office",
+    "description": "",
+    "tags": []
+  },
+  "_ColorMapModel": {
+    "qInfo": {
+      "qId": "ColorMapModel_aqaktAP",
+      "qType": "ColorMap"
+    },
+    "qMeta": {},
+    "colorMap": {
+      "colors": [
+        {
+          "value": "GRADIENT",
+          "baseColor": {
+            "color": "#276e27",
+            "index": 3
+          }
+        },
+        {
+          "value": "ALMA3",
+          "baseColor": {
+            "color": "#b6d7ea",
+            "index": 4
+          }
+        },
+        {
+          "value": "ALMAC",
+          "baseColor": {
+            "color": "#7db8da",
+            "index": 5
+          }
+        },
+        {
+          "value": "MULTI1",
+          "baseColor": {
+            "color": "#4477aa",
+            "index": 6
+          }
+        },
+        {
+          "value": "MULTI3",
+          "baseColor": {
+            "color": "#8e477d",
+            "index": 7
+          }
+        },
+        {
+          "value": "MULTI4",
+          "baseColor": {
+            "color": "#ffcf02",
+            "index": 8
+          }
+        },
+        {
+          "value": "MULTI5",
+          "baseColor": {
+            "color": "#f8981d",
+            "index": 9
+          }
+        },
+        {
+          "value": "WIP",
+          "baseColor": {
+            "color": "#46c646",
+            "index": 2
+          }
+        }
+      ],
+      "nul": {
+        "color": "#545352",
+        "index": 14
+      },
+      "oth": {
+        "color": "#7b7a78",
+        "index": 13
+      },
+      "pal": null,
+      "single": null,
+      "usePal": true,
+      "autoFill": true
+    }
+  }
+}

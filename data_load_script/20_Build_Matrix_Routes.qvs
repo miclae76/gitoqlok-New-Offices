@@ -1,0 +1,67 @@
+///$tab 20_Build_Matrix_Routes
+Adresses_Geocoded:
+LOAD
+    Input_Address,
+    formatted_address,
+    place_id,			// Is Used in Direction API as Origine and Destination
+    __KEY_results,
+ //   __KEY_root,
+    lat_u1,
+    lng_u1,
+    GeoMakePoint(lat_u1,lng_u1) AS Location,
+    __KEY_geometry,
+    Employee,
+    Raw_Address,
+    Office
+FROM [lib://Qlik_Data_Repo/Adresses_Geocoded.qvd]
+(qvd)
+where __KEY_results =1 and __KEY_geometry = 1;
+
+LEFT JOIN (Adresses_Geocoded)
+LOAD
+    Employee,
+ "Pondération
+Bel"						AS Weight_Soc_B,
+    "Pondération
+Lux"						AS Weight_Soc_L
+FROM [lib://Qlik_Data_Repo/Adresses.xlsx]
+(ooxml, embedded labels, table is Sheet1);
+
+LEFT JOIN (Adresses_Geocoded)
+LOAD
+    Office,
+	Soc
+FROM [lib://Qlik_Data_Repo/Adresses.xlsx]
+(ooxml, embedded labels, table is Sheet1);
+
+
+
+E2O_Matrix:
+LOAD
+    place_id as origine_place_id,			// Is Used in Direction API as Origine and Destination
+    Employee,
+    'B' as Soc
+Resident Adresses_Geocoded
+Where NOT IsNull(Employee)
+and __KEY_results =1 and __KEY_geometry = 1 and  Weight_Soc_B > 0 ;//and Employee = 'DBR';
+LOAD
+    place_id as origine_place_id,			// Is Used in Direction API as Origine and Destination
+    Employee,
+    'L' as Soc
+Resident Adresses_Geocoded
+Where NOT IsNull(Employee)
+and __KEY_results =1 and __KEY_geometry = 1 and  Weight_Soc_L > 0;
+
+
+
+JOIN (E2O_Matrix)
+LOAD
+    place_id as destination_place_id,			// Is Used in Direction API as Origine and Destination
+    Office,
+    Soc
+Resident Adresses_Geocoded
+Where NOT IsNull(Office)
+and __KEY_results =1 and __KEY_geometry = 1;  //and Soc = 'B';
+
+LEFT JOIN (E2O_Matrix)
+LOAD Employee&'|'&Office as Matrix_Key, * Resident E2O_Matrix;

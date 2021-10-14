@@ -1,0 +1,231 @@
+///$tab 10_Geocoding APIs
+if vGeoCode = 1 THEN
+
+
+  Address:
+  LOAD
+      Employee,
+      F2					AS Raw_Address,
+      replace(F2,' ','+') AS Input_Address,
+      Country,
+    "Pondération
+Bel"						AS Weight_Soc_B,
+    "Pondération
+Lux"						AS Weight_Soc_L
+  FROM [lib://Qlik_Data_Repo/Adresses.xlsx]
+  (ooxml, embedded labels, table is Sheet1)
+  where len(trim(Employee))>0;
+
+  Concatenate(Address)
+  LOAD
+      Office,	
+      F7	        		AS Raw_Address,
+      replace(F7,' ','+') AS Input_Address,
+      Country1			   AS Country,
+    Soc
+  FROM [lib://Qlik_Data_Repo/Adresses.xlsx]
+  (ooxml, embedded labels, table is Sheet1)
+  where len(trim(Office))>0;
+
+
+  LIB CONNECT TO 'maps_google_apis';
+
+  For i=1 to NoOfRows('Address')
+
+    LET vAddress = peek('Input_Address', $(i)-1, 'Address');
+    LET vCountry = peek('Country', $(i)-1, 'Address');
+
+    TRACE $(vAddress),+$(vCountry);
+
+    RestConnectorMasterTable:
+    LOAD * INLINE [formatted_address] ;
+
+    Concatenate(RestConnectorMasterTable)
+    LOAD '$(vAddress)' AS Input_Address,
+    *;
+    SQL SELECT 
+        "status",
+        "__KEY_root",
+        (SELECT 
+            "formatted_address",
+            "place_id",
+            "__KEY_results",
+            "__FK_results",
+            (SELECT 
+                "long_name",
+                "short_name",
+                "__KEY_address_components",
+                "__FK_address_components",
+                (SELECT 
+                    "@Value",
+                    "__FK_types"
+                FROM "types" FK "__FK_types" ArrayValueAlias "@Value")
+            FROM "address_components" PK "__KEY_address_components" FK "__FK_address_components"),
+            (SELECT 
+                "location_type",
+                "__KEY_geometry",
+                "__FK_geometry",
+                (SELECT 
+                    "__KEY_bounds",
+                    "__FK_bounds",
+                    (SELECT 
+                        "lat",
+                        "lng",
+                        "__FK_northeast"
+                    FROM "northeast" FK "__FK_northeast"),
+                    (SELECT 
+                        "lat" AS "lat_u0",
+                        "lng" AS "lng_u0",
+                        "__FK_southwest"
+                    FROM "southwest" FK "__FK_southwest")
+                FROM "bounds" PK "__KEY_bounds" FK "__FK_bounds"),
+                (SELECT 
+                    "lat" AS "lat_u1",
+                    "lng" AS "lng_u1",
+                    "__FK_location"
+                FROM "location" FK "__FK_location"),
+                (SELECT 
+                    "__KEY_viewport",
+                    "__FK_viewport",
+                    (SELECT 
+                        "lat" AS "lat_u2",
+                        "lng" AS "lng_u2",
+                        "__FK_northeast_u0"
+                    FROM "northeast" FK "__FK_northeast_u0"),
+                    (SELECT 
+                        "lat" AS "lat_u3",
+                        "lng" AS "lng_u3",
+                        "__FK_southwest_u0"
+                    FROM "southwest" FK "__FK_southwest_u0")
+                FROM "viewport" PK "__KEY_viewport" FK "__FK_viewport")
+            FROM "geometry" PK "__KEY_geometry" FK "__FK_geometry"),
+            (SELECT 
+                "@Value" AS "@Value_u0",
+                "__FK_types_u0"
+            FROM "types" FK "__FK_types_u0" ArrayValueAlias "@Value_u0")
+        FROM "results" PK "__KEY_results" FK "__FK_results")
+    FROM JSON (wrap on) "root" PK "__KEY_root"
+    WITH CONNECTION(Url "https://maps.googleapis.com/maps/api/geocode/json?address=$(vAddress),+$(vCountry)&key=AIzaSyD-a2kZ1iyFAvSPK26r_Ti9--G0BpMuyzU");
+
+
+//     [types]:
+//     LOAD	[@Value] AS [@Value],
+//         [__FK_types] AS [__KEY_address_components]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_types]);
+
+
+    [address_components]:
+    LOAD	[long_name] AS [long_name],
+        [short_name] AS [short_name],
+        [__KEY_address_components] AS [__KEY_address_components],
+        [__FK_address_components] AS [__KEY_results]
+    RESIDENT RestConnectorMasterTable
+    WHERE NOT IsNull([__FK_address_components]);
+
+
+//     [northeast]:
+//     LOAD	[lat] AS [lat],
+//         [lng] AS [lng],
+//         [__FK_northeast] AS [__KEY_bounds]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_northeast]);
+
+
+//     [southwest]:
+//     LOAD	[lat_u0] AS [lat_u0],
+//         [lng_u0] AS [lng_u0],
+//         [__FK_southwest] AS [__KEY_bounds]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_southwest]);
+
+
+//     [bounds]:
+//     LOAD	[__KEY_bounds] AS [__KEY_bounds],
+//         [__FK_bounds] AS [__KEY_geometry]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_bounds]);
+
+
+    [location]:
+    LOAD
+        Input_Address,
+        [lat_u1] AS [lat_u1],
+        [lng_u1] AS [lng_u1],
+        [__FK_location] AS [__KEY_geometry]
+    RESIDENT RestConnectorMasterTable
+    WHERE NOT IsNull([__FK_location]);
+
+
+//     [northeast_u0]:
+//     LOAD	[lat_u2] AS [lat_u2],
+//         [lng_u2] AS [lng_u2],
+//         [__FK_northeast_u0] AS [__KEY_viewport]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_northeast_u0]);
+
+
+//     [southwest_u0]:
+//     LOAD	[lat_u3] AS [lat_u3],
+//         [lng_u3] AS [lng_u3],
+//         [__FK_southwest_u0] AS [__KEY_viewport]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_southwest_u0]);
+
+
+//     [viewport]:
+//     LOAD	[__KEY_viewport] AS [__KEY_viewport],
+//         [__FK_viewport] AS [__KEY_geometry]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_viewport]);
+
+
+//     [geometry]:
+//     LOAD	[location_type] AS [location_type],
+//         [__KEY_geometry] AS [__KEY_geometry],
+//         [__FK_geometry] AS [__KEY_results]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_geometry]);
+
+
+//     [types_u0]:
+//     LOAD	[@Value_u0] AS [@Value_u0],
+//         [__FK_types_u0] AS [__KEY_results]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__FK_types_u0]);
+
+
+    [results]:
+    LOAD	
+        Input_Address,
+        [formatted_address] AS [formatted_address],
+        [place_id] AS [place_id],
+        [__KEY_results] AS [__KEY_results],
+        [__FK_results] AS [__KEY_root]
+    RESIDENT RestConnectorMasterTable
+    WHERE NOT IsNull([__FK_results]);
+
+
+//     [root]:
+//     LOAD	[status] AS [status],
+//         [__KEY_root] AS [__KEY_root]
+//     RESIDENT RestConnectorMasterTable
+//     WHERE NOT IsNull([__KEY_root]);
+
+
+    DROP TABLE RestConnectorMasterTable;
+
+  NEXT i
+
+  // Store Results
+  LEFT JOIN ([results]) 
+  LOAD * Resident [location];
+
+  LEFT JOIN ([results]) 
+  LOAD * Resident Address;
+
+  STORE [results] INTO [lib://Qlik_Data_Repo/Adresses_Geocoded.qvd] (qvd);
+
+  Drop Tables results, location, Address;
+  
+ENDIF

@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "1fe547dc-2aca-42ad-8d08-e7f87e757902",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vOffice",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "BLUE"
+}

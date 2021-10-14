@@ -1,0 +1,9 @@
+{
+  "qName": "Weight_Soc_B",
+  "qTags": [
+    "$numeric"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "qName": "Location",
+  "qTags": [
+    "$geopoint",
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded"
+  ]
+}

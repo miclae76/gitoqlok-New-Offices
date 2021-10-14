@@ -1,0 +1,24 @@
+{
+  "qInfo": {
+    "qId": "egppejE",
+    "qType": "dimension"
+  },
+  "qDim": {
+    "qGrouping": "N",
+    "qFieldDefs": [
+      "=Hour(Departure_Time)&':00'"
+    ],
+    "qFieldLabels": [
+      "Departure_Hour"
+    ],
+    "title": "Departure_Hour",
+    "coloring": {
+      "changeHash": "0.47245942731387913"
+    }
+  },
+  "qMetaDef": {
+    "title": "Departure_Hour",
+    "description": "",
+    "tags": []
+  }
+}

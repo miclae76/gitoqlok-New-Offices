@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "01727f10-9335-4eea-b794-9c5ade0baedf",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vTraffic",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "best_guess"
+}

@@ -1,0 +1,10 @@
+{
+  "qName": "Traffic_Model",
+  "qTags": [
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

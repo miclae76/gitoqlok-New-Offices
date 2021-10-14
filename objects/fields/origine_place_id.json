@@ -1,0 +1,10 @@
+{
+  "qName": "origine_place_id",
+  "qTags": [
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "E2O_Matrix"
+  ]
+}

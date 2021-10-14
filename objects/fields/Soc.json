@@ -1,0 +1,13 @@
+{
+  "qName": "Soc",
+  "qTags": [
+    "$text",
+    "$ascii",
+    "$key",
+    "$keypart"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded",
+    "E2O_Matrix"
+  ]
+}

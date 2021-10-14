@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "0751ce0c-a2e3-49c7-9336-0c2917a627c0",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "t",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "30"
+}

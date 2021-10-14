@@ -1,0 +1,316 @@
+///$tab -- INFO -- Model JSON
+/* REST API JSON Call and answer JSON parsing
+
+https://maps.googleapis.com/maps/api/directions/json?origin=place_id:ChIJ685WIFYViEgRHlHvBbiD5nE&destination=place_id:ChIJA01I-8YVhkgRGJb0fW4UX7Y&mode=driving&departure_time=1518328800&traffic_model=pessimistic&key=AIzaSyBxLZJfmM723UwzIOSFg026EVEjSAQyqHs
+
+
+LIB CONNECT TO 'Test Traffic Model (qlikcloud_miclae76)';
+
+RestConnectorMasterTable:
+SQL SELECT 
+	"status",
+	"__KEY_root",
+	(SELECT 
+		"geocoder_status",
+		"place_id",
+		"__KEY_geocoded_waypoints",
+		"__FK_geocoded_waypoints",
+		(SELECT 
+			"@Value",
+			"__FK_types"
+		FROM "types" FK "__FK_types" ArrayValueAlias "@Value")
+	FROM "geocoded_waypoints" PK "__KEY_geocoded_waypoints" FK "__FK_geocoded_waypoints"),
+	(SELECT 
+		"copyrights",
+		"summary",
+		"__KEY_routes",
+		"__FK_routes",
+		(SELECT 
+			"__KEY_bounds",
+			"__FK_bounds",
+			(SELECT 
+				"lat",
+				"lng",
+				"__FK_northeast"
+			FROM "northeast" FK "__FK_northeast"),
+			(SELECT 
+				"lat" AS "lat_u0",
+				"lng" AS "lng_u0",
+				"__FK_southwest"
+			FROM "southwest" FK "__FK_southwest")
+		FROM "bounds" PK "__KEY_bounds" FK "__FK_bounds"),
+		(SELECT 
+			"end_address",
+			"start_address",
+			"__KEY_legs",
+			"__FK_legs",
+			(SELECT 
+				"text",
+				"value",
+				"__FK_distance"
+			FROM "distance" FK "__FK_distance"),
+			(SELECT 
+				"text" AS "text_u0",
+				"value" AS "value_u0",
+				"__FK_duration"
+			FROM "duration" FK "__FK_duration"),
+			(SELECT 
+				"text" AS "text_u1",
+				"value" AS "value_u1",
+				"__FK_duration_in_traffic"
+			FROM "duration_in_traffic" FK "__FK_duration_in_traffic"),
+			(SELECT 
+				"lat" AS "lat_u1",
+				"lng" AS "lng_u1",
+				"__FK_end_location"
+			FROM "end_location" FK "__FK_end_location"),
+			(SELECT 
+				"lat" AS "lat_u2",
+				"lng" AS "lng_u2",
+				"__FK_start_location"
+			FROM "start_location" FK "__FK_start_location"),
+			(SELECT 
+				"html_instructions",
+				"travel_mode",
+				"maneuver",
+				"__KEY_steps",
+				"__FK_steps",
+				(SELECT 
+					"text" AS "text_u2",
+					"value" AS "value_u2",
+					"__FK_distance_u0"
+				FROM "distance" FK "__FK_distance_u0"),
+				(SELECT 
+					"text" AS "text_u3",
+					"value" AS "value_u3",
+					"__FK_duration_u0"
+				FROM "duration" FK "__FK_duration_u0"),
+				(SELECT 
+					"lat" AS "lat_u3",
+					"lng" AS "lng_u3",
+					"__FK_end_location_u0"
+				FROM "end_location" FK "__FK_end_location_u0"),
+				(SELECT 
+					"points",
+					"__FK_polyline"
+				FROM "polyline" FK "__FK_polyline"),
+				(SELECT 
+					"lat" AS "lat_u4",
+					"lng" AS "lng_u4",
+					"__FK_start_location_u0"
+				FROM "start_location" FK "__FK_start_location_u0")
+			FROM "steps" PK "__KEY_steps" FK "__FK_steps"),
+			(SELECT 
+				"@Value" AS "@Value_u0",
+				"__FK_traffic_speed_entry"
+			FROM "traffic_speed_entry" FK "__FK_traffic_speed_entry" ArrayValueAlias "@Value_u0"),
+			(SELECT 
+				"@Value" AS "@Value_u1",
+				"__FK_via_waypoint"
+			FROM "via_waypoint" FK "__FK_via_waypoint" ArrayValueAlias "@Value_u1")
+		FROM "legs" PK "__KEY_legs" FK "__FK_legs"),
+		(SELECT 
+			"points" AS "points_u0",
+			"__FK_overview_polyline"
+		FROM "overview_polyline" FK "__FK_overview_polyline"),
+		(SELECT 
+			"@Value" AS "@Value_u2",
+			"__FK_warnings"
+		FROM "warnings" FK "__FK_warnings" ArrayValueAlias "@Value_u2"),
+		(SELECT 
+			"@Value" AS "@Value_u3",
+			"__FK_waypoint_order"
+		FROM "waypoint_order" FK "__FK_waypoint_order" ArrayValueAlias "@Value_u3")
+	FROM "routes" PK "__KEY_routes" FK "__FK_routes")
+FROM JSON (wrap on) "root" PK "__KEY_root";
+
+[types]:
+LOAD	[@Value] AS [@Value],
+	[__FK_types] AS [__KEY_geocoded_waypoints]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_types]);
+
+
+[geocoded_waypoints]:
+LOAD	[geocoder_status] AS [geocoder_status],
+	[place_id] AS [place_id],
+	[__KEY_geocoded_waypoints] AS [__KEY_geocoded_waypoints],
+	[__FK_geocoded_waypoints] AS [__KEY_root]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_geocoded_waypoints]);
+
+
+[northeast]:
+LOAD	[lat] AS [lat],
+	[lng] AS [lng],
+	[__FK_northeast] AS [__KEY_bounds]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_northeast]);
+
+
+[southwest]:
+LOAD	[lat_u0] AS [lat_u0],
+	[lng_u0] AS [lng_u0],
+	[__FK_southwest] AS [__KEY_bounds]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_southwest]);
+
+
+[bounds]:
+LOAD	[__KEY_bounds] AS [__KEY_bounds],
+	[__FK_bounds] AS [__KEY_routes]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_bounds]);
+
+
+[distance]:
+LOAD	[text] AS [text],
+	[value] AS [value],
+	[__FK_distance] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_distance]);
+
+
+[duration]:
+LOAD	[text_u0] AS [text_u0],
+	[value_u0] AS [value_u0],
+	[__FK_duration] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_duration]);
+
+
+[duration_in_traffic]:
+LOAD	[text_u1] AS [text_u1],
+	[value_u1] AS [value_u1],
+	[__FK_duration_in_traffic] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_duration_in_traffic]);
+
+
+[end_location]:
+LOAD	[lat_u1] AS [lat_u1],
+	[lng_u1] AS [lng_u1],
+	[__FK_end_location] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_end_location]);
+
+
+[start_location]:
+LOAD	[lat_u2] AS [lat_u2],
+	[lng_u2] AS [lng_u2],
+	[__FK_start_location] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_start_location]);
+
+
+[distance_u0]:
+LOAD	[text_u2] AS [text_u2],
+	[value_u2] AS [value_u2],
+	[__FK_distance_u0] AS [__KEY_steps]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_distance_u0]);
+
+
+[duration_u0]:
+LOAD	[text_u3] AS [text_u3],
+	[value_u3] AS [value_u3],
+	[__FK_duration_u0] AS [__KEY_steps]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_duration_u0]);
+
+
+[end_location_u0]:
+LOAD	[lat_u3] AS [lat_u3],
+	[lng_u3] AS [lng_u3],
+	[__FK_end_location_u0] AS [__KEY_steps]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_end_location_u0]);
+
+
+[polyline]:
+LOAD	[points] AS [points],
+	[__FK_polyline] AS [__KEY_steps]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_polyline]);
+
+
+[start_location_u0]:
+LOAD	[lat_u4] AS [lat_u4],
+	[lng_u4] AS [lng_u4],
+	[__FK_start_location_u0] AS [__KEY_steps]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_start_location_u0]);
+
+
+[steps]:
+LOAD	[html_instructions] AS [html_instructions],
+	[travel_mode] AS [travel_mode],
+	[maneuver] AS [maneuver],
+	[__KEY_steps] AS [__KEY_steps],
+	[__FK_steps] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_steps]);
+
+
+[traffic_speed_entry]:
+LOAD	[@Value_u0] AS [@Value_u0],
+	[__FK_traffic_speed_entry] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_traffic_speed_entry]);
+
+
+[via_waypoint]:
+LOAD	[@Value_u1] AS [@Value_u1],
+	[__FK_via_waypoint] AS [__KEY_legs]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_via_waypoint]);
+
+
+[legs]:
+LOAD	[end_address] AS [end_address],
+	[start_address] AS [start_address],
+	[__KEY_legs] AS [__KEY_legs],
+	[__FK_legs] AS [__KEY_routes]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_legs]);
+
+
+[overview_polyline]:
+LOAD	[points_u0] AS [points_u0],
+	[__FK_overview_polyline] AS [__KEY_routes]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_overview_polyline]);
+
+
+[warnings]:
+LOAD	[@Value_u2] AS [@Value_u2],
+	[__FK_warnings] AS [__KEY_routes]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_warnings]);
+
+
+[waypoint_order]:
+LOAD	[@Value_u3] AS [@Value_u3],
+	[__FK_waypoint_order] AS [__KEY_routes]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_waypoint_order]);
+
+
+[routes]:
+LOAD	[copyrights] AS [copyrights],
+	[summary] AS [summary],
+	[__KEY_routes] AS [__KEY_routes],
+	[__FK_routes] AS [__KEY_root]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__FK_routes]);
+
+
+[root]:
+LOAD	[status] AS [status],
+	[__KEY_root] AS [__KEY_root]
+RESIDENT RestConnectorMasterTable
+WHERE NOT IsNull([__KEY_root]);
+
+
+DROP TABLE RestConnectorMasterTable;
+*/

@@ -1,0 +1,24 @@
+{
+  "qInfo": {
+    "qId": "vctZJj",
+    "qType": "measure"
+  },
+  "qMeasure": {
+    "qLabel": "Distance (km)",
+    "qDef": "avg([Distance(m)])/1000",
+    "qGrouping": "N",
+    "qExpressions": [],
+    "qActiveExpression": 0,
+    "qNumFormat": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "coloring": {}
+  },
+  "qMetaDef": {
+    "title": "Distance (km)",
+    "description": "",
+    "tags": []
+  }
+}

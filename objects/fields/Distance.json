@@ -1,0 +1,10 @@
+{
+  "qName": "Distance",
+  "qTags": [
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

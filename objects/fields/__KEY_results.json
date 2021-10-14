@@ -1,0 +1,10 @@
+{
+  "qName": "__KEY_results",
+  "qTags": [
+    "$numeric",
+    "$integer"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded"
+  ]
+}

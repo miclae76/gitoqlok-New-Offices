@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "05de7f21-7a6c-4f25-8458-126d1311e003",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vEmployee",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "DBR"
+}

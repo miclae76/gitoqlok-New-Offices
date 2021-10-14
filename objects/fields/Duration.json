@@ -1,0 +1,10 @@
+{
+  "qName": "Duration",
+  "qTags": [
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

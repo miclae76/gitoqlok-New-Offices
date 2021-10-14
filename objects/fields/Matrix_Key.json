@@ -1,0 +1,12 @@
+{
+  "qName": "Matrix_Key",
+  "qTags": [
+    "$text",
+    "$ascii",
+    "$key"
+  ],
+  "qSrcTables": [
+    "E2O_Matrix",
+    "Routes"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "qName": "Direction",
+  "qTags": [
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

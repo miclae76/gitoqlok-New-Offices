@@ -1,0 +1,9 @@
+{
+  "qName": "lat_u1",
+  "qTags": [
+    "$numeric"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded"
+  ]
+}

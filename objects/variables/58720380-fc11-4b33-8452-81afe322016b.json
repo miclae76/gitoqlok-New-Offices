@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "58720380-fc11-4b33-8452-81afe322016b",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vDayStart",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "1519794000"
+}

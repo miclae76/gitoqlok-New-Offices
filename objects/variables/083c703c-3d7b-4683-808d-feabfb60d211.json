@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "083c703c-3d7b-4683-808d-feabfb60d211",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vOrigine",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "ChIJ18axs1bDw0cRnceIcyTfEZE"
+}

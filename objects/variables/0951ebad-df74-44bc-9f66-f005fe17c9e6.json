@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "0951ebad-df74-44bc-9f66-f005fe17c9e6",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vCountry",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "LU"
+}

@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "8b98f5a1-f1f1-4880-b2db-58ff1d86d69a",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vSens",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "FromOffice"
+}

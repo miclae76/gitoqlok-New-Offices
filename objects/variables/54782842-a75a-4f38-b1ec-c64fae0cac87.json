@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "54782842-a75a-4f38-b1ec-c64fae0cac87",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vDepTime",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "1519846200"
+}

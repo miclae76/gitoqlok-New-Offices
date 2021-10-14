@@ -1,0 +1,77 @@
+///$tab 50_Merge Results
+//Drop Table E2O_Matrix;
+
+/*1519016400, 1519102800, 1519189200, 1519275600,  1519362000,*/ //1519621200, 1519707600
+Map_Shift_Day:
+Mapping LOAD * Inline [
+Original, Shift
+1519621200, 604800
+1519707600, 604800
+
+];
+
+
+Routes:
+LOAD Distinct
+	ConvertToLocalTime(Date(MakeDate(1970, 1, 1) + (subfield(FileBaseName(), '_', 3)
+    -if(subfield(FileBaseName(), '_', 3)>=1519621200, 604800 ,0)) / 86400), 'Paris') AS Departure_Time,
+    subfield(FileBaseName(), '_', -1)							AS Direction,
+    Matrix_Key,
+//     Subfield(Matrix_Key,'|',1) AS Employee,
+//     Subfield(Matrix_Key,'|',2) AS Office,
+    __KEY_legs,
+//    __KEY_routes,
+//    copyrights,
+//    summary,
+//    __KEY_root,
+//    end_address,
+//    start_address,
+    Traffic_Model,
+    text_u0			as Duration,
+    value_u0 		as [Duration(s)],
+    text_u1			as Duration_in_Traffic,
+    value_u1		as [Duration_in_Traffic(s)],
+    "text"			as Distance,
+    value			as [Distance(m)] 
+FROM [lib://Qlik_Data_Repo/Routes_legs_*.qvd]
+(qvd) where exists(Matrix_Key);
+
+Concatenate (Routes)
+LOAD
+    Departure_Time,
+    Direction,
+    Matrix_Key,
+    __KEY_legs,
+    Traffic_Model,
+    Duration,
+    "Duration(s)",
+    Duration_in_Traffic,
+    "Duration_in_Traffic(s)",
+    Distance,
+    "Distance(m)"
+FROM [lib://Qlik_Data_Repo/Routes_All.qvd]
+(qvd);
+
+Store Routes into [lib://Qlik_Data_Repo/Routes_All.qvd]
+(qvd);
+
+
+
+
+
+
+/*
+LOAD 
+    Matrix_Key,
+    __KEY_steps,
+    html_instructions,
+    travel_mode,
+    maneuver,
+    __KEY_legs,
+    text_u2			as Step_Duration,
+    value_u2		as [Step_Duration(s)],
+    text_u1			as Step_Distance,
+    value_u1		as [Step_[Distance(m)]
+FROM [lib://Qlik_Data_Repo/Routes_steps_*.qvd]
+(qvd) where exists(Matrix_Key);
+*/

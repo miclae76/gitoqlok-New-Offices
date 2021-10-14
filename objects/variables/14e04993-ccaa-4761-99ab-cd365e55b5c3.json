@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "14e04993-ccaa-4761-99ab-cd365e55b5c3",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vAddress",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "283+Route+Arlon,+8011+Strassen"
+}

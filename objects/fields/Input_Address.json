@@ -1,0 +1,9 @@
+{
+  "qName": "Input_Address",
+  "qTags": [
+    "$text"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded"
+  ]
+}

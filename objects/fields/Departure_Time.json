@@ -1,0 +1,10 @@
+{
+  "qName": "Departure_Time",
+  "qTags": [
+    "$numeric",
+    "$timestamp"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

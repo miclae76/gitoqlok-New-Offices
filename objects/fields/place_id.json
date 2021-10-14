@@ -1,0 +1,10 @@
+{
+  "qName": "place_id",
+  "qTags": [
+    "$text",
+    "$ascii"
+  ],
+  "qSrcTables": [
+    "Adresses_Geocoded"
+  ]
+}

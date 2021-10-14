@@ -1,0 +1,23 @@
+[
+  {
+    "qProperty": {
+      "qInfo": {
+        "qId": "726409eb-cc80-40e3-8282-3c77d5a9ef88",
+        "qType": "appprops"
+      },
+      "qMetaDef": {},
+      "sheetTitleBgColor": "#4477aa",
+      "sheetTitleGradientColor": "#b6d7ea",
+      "sheetTitleColor": "#ffffff",
+      "sheetLogoThumbnail": {
+        "qStaticContentUrlDef": {
+          "qUrl": "/media/office-rent.jpg"
+        }
+      },
+      "sheetLogoPosition": "left",
+      "rtl": false,
+      "theme": "sense"
+    },
+    "qChildren": []
+  }
+]

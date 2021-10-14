@@ -1,0 +1,10 @@
+{
+  "qName": "Distance(m)",
+  "qTags": [
+    "$numeric",
+    "$integer"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

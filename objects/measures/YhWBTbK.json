@@ -1,0 +1,24 @@
+{
+  "qInfo": {
+    "qId": "YhWBTbK",
+    "qType": "measure"
+  },
+  "qMeasure": {
+    "qLabel": "Counter",
+    "qDef": "Count(Employee)",
+    "qGrouping": "N",
+    "qExpressions": [],
+    "qActiveExpression": 0,
+    "qNumFormat": {
+      "qType": "U",
+      "qnDec": 10,
+      "qUseThou": 0
+    },
+    "coloring": {}
+  },
+  "qMetaDef": {
+    "title": "Counter",
+    "description": "",
+    "tags": []
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "qInfo": {
+    "qId": "b6e766fa-9260-4ae8-adf7-f83b9627b543",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vGetRouteReturn",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "0",
+  "qIsScriptCreated": true
+}

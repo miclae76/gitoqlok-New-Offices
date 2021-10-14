@@ -1,0 +1,10 @@
+{
+  "qName": "Duration_in_Traffic(s)",
+  "qTags": [
+    "$numeric",
+    "$integer"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "fb1942c3-9a21-4a24-8b33-a81b4b88227d",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vApiKey",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "AIzaSyCVgxxna57bLN2SKIlr-v5gUgcvDBnv0p8"
+}

@@ -1,0 +1,10 @@
+{
+  "qName": "__KEY_legs",
+  "qTags": [
+    "$numeric",
+    "$integer"
+  ],
+  "qSrcTables": [
+    "Routes"
+  ]
+}

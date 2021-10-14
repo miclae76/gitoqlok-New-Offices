@@ -1,0 +1,63 @@
+{
+  "qInfo": {
+    "qId": "KHAKrHk",
+    "qType": "dimension"
+  },
+  "qDim": {
+    "qGrouping": "N",
+    "qFieldDefs": [
+      "Traffic_Model"
+    ],
+    "qFieldLabels": [
+      "Traffic_Model"
+    ],
+    "title": "Traffic_Model",
+    "coloring": {
+      "changeHash": "0.36108399334317354",
+      "colorMapRef": "KHAKrHk"
+    }
+  },
+  "qMetaDef": {
+    "title": "Traffic_Model",
+    "description": "",
+    "tags": []
+  },
+  "_ColorMapModel": {
+    "qInfo": {
+      "qId": "ColorMapModel_KHAKrHk",
+      "qType": "ColorMap"
+    },
+    "qMeta": {},
+    "colorMap": {
+      "colors": [
+        {
+          "value": "best_guess",
+          "baseColor": {
+            "color": "#ffcf02",
+            "index": 8
+          }
+        },
+        {
+          "value": "optimistic",
+          "baseColor": {
+            "color": "#46c646",
+            "index": 2
+          }
+        },
+        {
+          "value": "pessimistic",
+          "baseColor": {
+            "color": "#f93f17",
+            "index": 10
+          }
+        }
+      ],
+      "nul": null,
+      "oth": null,
+      "pal": null,
+      "single": null,
+      "usePal": true,
+      "autoFill": true
+    }
+  }
+}

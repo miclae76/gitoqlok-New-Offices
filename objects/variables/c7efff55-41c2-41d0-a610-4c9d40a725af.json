@@ -1,0 +1,14 @@
+{
+  "qInfo": {
+    "qId": "c7efff55-41c2-41d0-a610-4c9d40a725af",
+    "qType": "variable"
+  },
+  "qMetaDef": {},
+  "qName": "vDestination",
+  "qNumberPresentation": {
+    "qType": "U",
+    "qnDec": 10,
+    "qUseThou": 0
+  },
+  "qDefinition": "ChIJ2ZBfUkxiwUcREWsPZhrm_sk"
+}
